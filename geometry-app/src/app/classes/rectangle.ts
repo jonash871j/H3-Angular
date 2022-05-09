@@ -1,11 +1,10 @@
 import { Shape } from "./shape";
 
-export class Rectangle extends Shape {
+export class Rectangle implements Shape {
     a: number;
     b: number;
     
     constructor(a : number, b : number){
-        super();
         this.a = a;
         this.b = b;
     }

@@ -1,9 +1,5 @@
-export abstract class Shape
+export interface Shape
 {
-    abstract getCircumference() : number;
-    abstract getArea() : number;
-
-    toString() : string{
-        return "O = " + this.getCircumference() + " | A = " +  this.getArea();
-    }
+    getCircumference() : number;
+    getArea() : number;
 }

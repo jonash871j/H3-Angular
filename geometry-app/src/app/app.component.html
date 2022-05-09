@@ -1,1 +1,59 @@
-<h1>Hello World</h1>
+<div class="container">
+
+  <h1 class="mt-4">Geometry</h1>
+  <div class="row">
+    <div class="col-sm">
+      <div class="bs-component">
+        <div class="card border-primary mb-4" >
+          <div class="card-header">Rectangle</div>
+          <div class="card-body">
+            <label class="col-form-label">Site a:</label>
+            <input class="form-control" type="number" [(ngModel)]="rectangle.a"/>
+            <label class="col-form-label mt-2">Site b:</label>
+            <input class="form-control" type="number"  [(ngModel)]="rectangle.b">
+            <br/>
+            <h5>Circumference: {{rectangle.getCircumference()}}</h5>
+            <h5>Area: {{rectangle.getArea()}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-sm">
+      <div class="bs-component">
+        <div class="card border-success mb-4" >
+          <div class="card-header">Trapeze</div>
+          <div class="card-body">
+            <label class="col-form-label">Site a1:</label>
+            <input class="form-control" type="number" [(ngModel)]="trapeze.a1"/>
+            <label class="col-form-label">Site a2:</label>
+            <input class="form-control" type="number" [(ngModel)]="trapeze.a2"/>
+            <label class="col-form-label">Height:</label>
+            <input class="form-control" type="number" [(ngModel)]="trapeze.h"/>
+            <br/>
+            <h5>Circumference: {{trapeze.getCircumference()}}</h5>
+            <h5>Area: {{trapeze.getArea()}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <div class="bs-component">
+        <div class="card border-danger mb-4" style="max-width: 20rem;">
+            <div class="card-header">Parallelogram</div>
+            <div class="card-body">
+              <label class="col-form-label">Site a:</label>
+              <input class="form-control" type="number" [(ngModel)]="parallelogram.a"/>
+              <label class="col-form-label">Height:</label>
+              <input class="form-control" type="number" [(ngModel)]="parallelogram.h"/>
+              <label class="col-form-label">Angle:</label>
+              <input class="form-control" type="number" [(ngModel)]="parallelogram.angle"/>
+              <br/>
+              <h5>Circumference: {{parallelogram.getCircumference()}}</h5>
+              <h5>Area: {{parallelogram.getArea()}}</h5>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
