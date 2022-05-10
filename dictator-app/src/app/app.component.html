@@ -1,4 +1,4 @@
-<form [formGroup]="dictatorData">
+<form [formGroup]="dictatorForm">
   <div class="container">
     <h1 class="mt-4">Dictators</h1>
     <div class="row">
@@ -13,14 +13,8 @@
               <input class="form-control" type="text" formControlName = "lastName"/>
               <label class="col-form-label">Year of birth:</label>
               <input class="form-control" type="number" formControlName = "yearOfBirth"/>
-              <div class="form-check mt-2">
-                <input type="checkbox" formControlName = "isDead" class="form-check-input">
-                <label class="form-check-label">Is dead</label>
-              </div>
-              <div [class.invisible]=" dictatorData.get('isDead')?.value">
-                <label class="col-form-label">Year of death:</label>
-                <input class="form-control" formControlName = "yearOfDeath" type="number"/>
-              </div>
+              <label class="col-form-label">Year of death:</label>
+              <input class="form-control" formControlName = "yearOfDeath" type="number"/>
               <label class="col-form-label">Description:</label>
               <input class="form-control" type="text" formControlName = "description"/>
               <input class="form-control mt-2" type="button" value="Add" (click)="addDictator()">
@@ -35,10 +29,10 @@
             <div class="card-header">Dictator list</div>
             <div class="card-body">
               <label class="col-form-label">Dictators:</label>
-              <select class="form-control" Size="16" multiple="multiple" formControlName="dictatorList" (change)="selectedDictator()">  
-                <option *ngFor="let dictator of dictators">{{dictator.firstName}} {{dictator.lastName}}</option>  
+              <select class="form-control" Size="16" multiple="multiple" formControlName="dictatorList" (change)="selectedDictatorChanged()">  
+                <option *ngFor="let dictator of dictatorService.dictators">{{dictator.firstName}}-{{dictator.lastName}}</option>  
               </select>  
-              <input class="form-control mt-2" type="button" value="Remove">
+              <input class="form-control mt-2" type="button" value="Remove" (click)="removeDictator()">
               <br/>
             </div>
           </div>
@@ -49,11 +43,11 @@
           <div class="card border-danger mb-4" >
             <div class="card-header">Selected dictator</div>
             <div class="card-body">
-              <h6>First name: {{ dictators[selectedDictatorIndex]?.firstName}}</h6>
-              <h6>Last name: {{ dictators[selectedDictatorIndex]?.lastName}}</h6>
-              <h6>Year of birth: {{ dictators[selectedDictatorIndex]?.yearOfBirth}}</h6>
-              <h6>Year of death: {{ dictators[selectedDictatorIndex]?.yearOfDeath}}</h6>
-              <h6>Description: {{ dictators[selectedDictatorIndex]?.description}} </h6>
+              <h6>First name: {{ selectedDictator?.firstName}}</h6>
+              <h6>Last name: {{ selectedDictator?.lastName}}</h6>
+              <h6>Year of birth: {{ selectedDictator?.yearOfBirth}}</h6>
+              <h6>Year of death: {{ selectedDictator?.yearOfDeath}}</h6>
+              <h6>Description: {{ selectedDictator?.description}} </h6>
               <br/>
             </div>
           </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Dictator } from './classes/dictator';
+import { DictatorService } from './services/dictator.service';
 
 @Component({
   selector: 'app-root',
@@ -8,52 +9,45 @@ import { Dictator } from './classes/dictator';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {  
- constructor(private fb: FormBuilder){}
+ constructor(private fb: FormBuilder, dictatorService: DictatorService)
+ {
+  this.dictatorService = dictatorService;
+ }
 
   title = 'dictator-app';
-  dictatorData = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    isDead: ['', Validators.required],
-    yearOfBirth: ['', Validators.required],
-    yearOfDeath: ['', Validators.required],
-    description: ['', Validators.required],
-    dictatorList: [ '' ]
- });
- dictators : Dictator[] = [];
- selectedDictatorIndex : number = 0;
+  dictatorForm = this.fb.group({
+    firstName: '',
+    lastName: '',
+    yearOfBirth: '',
+    yearOfDeath: '',
+    description: '',
+    dictatorList: ''
+  });
+  dictatorService : DictatorService;
+  selectedDictator : Dictator | null = null;
 
   addDictator() {
     let dictator : Dictator = { 
-      firstName: this.dictatorData.get('firstName')?.value,
-      lastName : this.dictatorData.get('lastName')?.value,
-      isDead : this.dictatorData.get('isDead')?.value,
-      yearOfBirth : this.dictatorData.get('yearOfBirth')?.value,
-      yearOfDeath : this.dictatorData.get('yearOfDeath')?.value,
-      description : this.dictatorData.get('description')?.value 
+      firstName: this.dictatorForm.get('firstName')?.value,
+      lastName : this.dictatorForm.get('lastName')?.value,
+      yearOfBirth : this.dictatorForm.get('yearOfBirth')?.value,
+      yearOfDeath : this.dictatorForm.get('yearOfDeath')?.value,
+      description : this.dictatorForm.get('description')?.value 
     };
 
-    let dictatorFullName : string = dictator.firstName + " " + dictator.lastName;
-    if (this.getIndexOfByFullName(dictatorFullName) != -1){
-      return;
+    let isAdded : boolean = this.dictatorService.addDictator(dictator);
+    if (!isAdded){
+      alert("Failed to add dictator");
     }
-
-    this.dictators.push(dictator);
   }
 
-  selectedDictator() {
-    let fullName = this.dictatorData.get('dictatorList')?.value;
-    this.selectedDictatorIndex = this.getIndexOfByFullName(fullName);
+  selectedDictatorChanged() {
+    let fullName = this.dictatorForm.get('dictatorList')?.value;
+    this.selectedDictator = this.dictatorService.getDictator(fullName);
   }
 
-  getIndexOfByFullName(fullName : string) : number{
-    for (let i = 0; i < this.dictators.length; i++){
-      let dictator : Dictator = this.dictators[i];
-      let fullNameOfDictatorToCheck = dictator.firstName + " " + dictator.lastName;
-      if (fullNameOfDictatorToCheck == fullName){
-        return i;
-      }
-    }
-    return -1;
+  removeDictator(){
+    let fullName = this.dictatorForm.get('dictatorList')?.value;
+    this.dictatorService.removeDictator(fullName);
   }
 }
