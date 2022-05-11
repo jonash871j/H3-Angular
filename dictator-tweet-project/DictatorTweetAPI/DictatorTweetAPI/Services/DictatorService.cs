@@ -1,5 +1,6 @@
 ﻿using DictatorTweetAPI.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -13,7 +14,14 @@ namespace DictatorTweetAPI.Services
 
     public class DictatorService : IDictatorService
     {
+        private static Random random = new();
         private const string FileName = "dictators.json";
+        private readonly ITweetService tweetService;
+
+        public DictatorService(ITweetService tweetService)
+        {
+            this.tweetService = tweetService;
+        }
 
         public List<Dictator> GetDictators()
         {
@@ -36,6 +44,7 @@ namespace DictatorTweetAPI.Services
             dictators.Add(dictator);
             string json = JsonConvert.SerializeObject(dictators);
             File.WriteAllText(FileName, json);
+            tweetService.AsignAuthorToRandomTweets(dictator.GetFullName(), random.Next(6, 14));
             return true;
         }
     }

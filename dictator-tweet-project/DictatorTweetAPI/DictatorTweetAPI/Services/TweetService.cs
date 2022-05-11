@@ -1,32 +1,51 @@
 ﻿using DictatorTweetAPI.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DictatorTweetAPI.Services
 {
     public interface ITweetService
     {
-        bool AsignAuthorToRandomTweets(string author, int tweetAmount);
+        void AsignAuthorToRandomTweets(string author, int tweetAmount);
         List<Tweet> GetTweetsByAuthor(string author);
     }
 
     public class TweetService : ITweetService
     {
+        private const string FileName = "tweets.json";
+
         public List<Tweet> GetTweetsByAuthor(string author)
         {
-            return new List<Tweet>()
-            {
-                new Tweet
-                {
-                    Author = author,
-                    DateTime = System.DateTime.Now,
-                    Message = "Dont care"
-                }
-            };
+            return GetTweets().FindAll(t => t.Author == author);
         }
 
-        public bool AsignAuthorToRandomTweets(string author, int tweetAmount)
+        public void AsignAuthorToRandomTweets(string author, int tweetAmount)
         {
-            return false;
+            List<Tweet> tweets = GetTweets();
+            foreach(Tweet tweet in tweets)
+            {
+                if (tweet.Author == string.Empty)
+                {
+                    tweet.Author = author;
+                    tweetAmount--;
+                }
+                if (tweetAmount <= 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        private static List<Tweet> GetTweets()
+        {
+            if (!File.Exists(FileName))
+            {
+                return new List<Tweet>();
+            }
+
+            string fileData = File.ReadAllText(FileName);
+            return JsonConvert.DeserializeObject<List<Tweet>>(fileData);
         }
     }
 }
