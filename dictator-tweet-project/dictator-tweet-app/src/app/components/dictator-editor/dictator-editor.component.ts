@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dictator-editor',
@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class DictatorEditorComponent implements OnInit {
 
   constructor() { }
+  @Input() isEditMode : boolean = false;
 
   ngOnInit(): void {
   }
-
 }

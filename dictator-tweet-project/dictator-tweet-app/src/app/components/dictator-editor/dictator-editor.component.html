@@ -20,7 +20,9 @@
             </div>
         </div>
         <div class="mt-3 float-end">
-            <button class="btn btn-outline-primary">Create Dictator</button>
+            <button *ngIf="!isEditMode" class="btn btn-outline-primary me-2">Create Dictator</button>
+            <button *ngIf="isEditMode" class="btn btn-outline-danger me-2">Cancel</button>
+            <button *ngIf="isEditMode" class="btn btn-outline-primary me-2">Update Dictator</button>
         </div>
     </div>
   </div>
