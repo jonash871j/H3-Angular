@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DictatorTweetAPI": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "CONNECTION_STRING": "User ID=postgres;Password=Kode1234!;Host=192.168.1.2;Port=5432;Database=postgres;Pooling=false;Connection Lifetime=0;",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

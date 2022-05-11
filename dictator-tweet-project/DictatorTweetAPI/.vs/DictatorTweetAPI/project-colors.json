@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d0ffe5f8-910d-40fb-b10d-22e3a2697011": {
+      "ProjectGuid": "d0ffe5f8-910d-40fb-b10d-22e3a2697011",
+      "DisplayName": "DictatorTweetAPI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
