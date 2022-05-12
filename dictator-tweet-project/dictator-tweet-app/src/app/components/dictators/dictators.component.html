@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 <br/><br/>
 <div class="container">
-    <app-dictator-editor id="a"></app-dictator-editor>
+    <app-dictator-editor (selectedDictatorName)="selectedDictatorName"></app-dictator-editor>
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngFor="let dictator of $dictators | async">
             <div class="card mb-3">
                 <div class="card-header">
-                    <a class="btn" href="profile">Fullname's Profile</a>
-                    <button class="btn bi bi-pencil float-end"></button>
+                    <a class="btn" href="profile">{{ dictator.firstName }} {{ dictator.lastName }}'s profile</a>
+                    <button class="btn bi bi-pencil float-end" [(ngModel)]="selectedDictatorName" value="dictator.firstName + ' ' + dictator.lastName"></button>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -15,9 +15,8 @@
                             <img src="../../../assets/profile-image.jpg" class="rounded float-left" style="width: 100%;">
                         </div>
                         <div class="col-lg-8">
-                            <h5>About</h5>
-                            <p>Hence, legal documents are being crafted which take me completely out of business operations</p>
-            
+                            <h5>{{selectedDictatorName}}</h5>
+                            <p>{{dictator.description}}</p>
                         </div>
                     </div>
                     <app-tweet></app-tweet>

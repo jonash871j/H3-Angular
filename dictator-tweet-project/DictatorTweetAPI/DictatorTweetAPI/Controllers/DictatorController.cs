@@ -1,5 +1,6 @@
 ﻿using DictatorTweetAPI.Models;
 using DictatorTweetAPI.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -22,10 +23,15 @@ namespace DictatorTweetAPI.Controllers
             return dictatorService.GetDictators();
         }
 
-        [HttpPut]
-        public ActionResult<bool> Put(Dictator dictator)
+        [HttpPost]
+        public ActionResult<bool> Post(Dictator dictator)
         {
-            return dictatorService.AddDictator(dictator);
+            if (!dictatorService.AddDictator(dictator))
+            {
+                Response.StatusCode = 403;
+                return false;
+            }
+            return true;
         }
     }
 }

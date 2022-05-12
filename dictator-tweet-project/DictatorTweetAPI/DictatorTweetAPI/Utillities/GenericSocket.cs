@@ -91,7 +91,7 @@ namespace DictatorTweetAPI.Utillities
             byte[] requestData = GetRequest(clientSocket);
 
             // Sends server response to client
-            SendResponse(Encoding.ASCII.GetString(requestData), clientSocket);
+            SendResponse(Encoding.UTF8.GetString(requestData), clientSocket);
             clientSocket.Close();
         }
 

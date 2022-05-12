@@ -35,6 +35,8 @@ namespace DictatorTweetAPI.Services
                     break;
                 }
             }
+            string json = JsonConvert.SerializeObject(tweets, Formatting.Indented);
+            File.WriteAllText("tweets.json", json);
         }
 
         private static List<Tweet> GetTweets()
@@ -44,8 +46,8 @@ namespace DictatorTweetAPI.Services
                 return new List<Tweet>();
             }
 
-            string fileData = File.ReadAllText(FileName);
-            return JsonConvert.DeserializeObject<List<Tweet>>(fileData);
+            string json = File.ReadAllText(FileName);
+            return JsonConvert.DeserializeObject<List<Tweet>>(json);
         }
     }
 }

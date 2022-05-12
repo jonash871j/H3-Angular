@@ -36,15 +36,15 @@ namespace DictatorTweetAPI.Services
         public bool AddDictator(Dictator dictator)
         {
             List<Dictator> dictators = GetDictators();
-            if (dictators.Exists(d => d.GetFullName() == dictator.GetFullName()))
+            if (dictators.Exists(d => d.FullName == dictator.FullName) || !dictator.IsValid())
             {
                 return false;
             }
 
             dictators.Add(dictator);
-            string json = JsonConvert.SerializeObject(dictators);
+            string json = JsonConvert.SerializeObject(dictators, Formatting.Indented);
             File.WriteAllText(FileName, json);
-            tweetService.AsignAuthorToRandomTweets(dictator.GetFullName(), random.Next(6, 14));
+            tweetService.AsignAuthorToRandomTweets(dictator.FullName, random.Next(6, 14));
             return true;
         }
     }

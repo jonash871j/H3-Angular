@@ -60,3 +60,6 @@ C:\Users\Jonas\Source\Repos\H3-Angular\dictator-tweet-project\DictatorTweetAPI\D
 C:\Users\Jonas\Source\Repos\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\obj\Debug\net5.0\DictatorTweetAPI.genruntimeconfig.cache
 C:\Users\Jonas\Source\Repos\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\obj\Debug\net5.0\ref\DictatorTweetAPI.dll
 C:\Users\Jonas\source\repos\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\bin\Debug\net5.0\tweets.json
+C:\Users\jonas.hansen\Desktop\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\bin\Debug\net5.0\tweetBackup.json
+C:\Users\jonas.hansen\Desktop\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\bin\Debug\net5.0\tweets.json
+C:\Users\jonas.hansen\Desktop\H3-Angular\dictator-tweet-project\DictatorTweetAPI\DictatorTweetAPI\bin\Debug\net5.0\web.config

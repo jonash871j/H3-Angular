@@ -1,28 +1,28 @@
 <div class="card mb-3">
-    <div class="card-header">Create Dictator</div>
+    <div class="card-header">Create dictator</div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm">
                 <div class="form-group">
                     <label class="form-label">First name</label>
-                    <input type="text" class="form-control" placeholder="Enter first name">
+                    <input type="text" class="form-control" placeholder="Enter first name" [(ngModel)]="dictator.firstName">
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-2">Last name</label>
-                    <input type="text" class="form-control" placeholder="Enter last name">
+                    <input type="text" class="form-control" placeholder="Enter last name" [(ngModel)]="dictator.lastName">
                 </div>
             </div>
             <div class="col-sm">
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea type="text" class="form-control" rows="4" placeholder="Enter description..." style="resize: none;"></textarea>
+                    <textarea type="text" class="form-control" rows="4" placeholder="Enter description..." style="resize: none;" [(ngModel)]="dictator.description"></textarea>
                 </div>
             </div>
         </div>
         <div class="mt-3 float-end">
-            <button *ngIf="!isEditMode" class="btn btn-outline-primary me-2">Create Dictator</button>
-            <button *ngIf="isEditMode" class="btn btn-outline-danger me-2">Cancel</button>
-            <button *ngIf="isEditMode" class="btn btn-outline-primary me-2">Update Dictator</button>
+            <button *ngIf="selectedDictatorName == ''" class="btn btn-outline-primary me-2" (click)="createDictator()">Create Dictator</button>
+            <button *ngIf="selectedDictatorName != ''" class="btn btn-outline-danger me-2">Cancel</button>
+            <button *ngIf="selectedDictatorName != ''" class="btn btn-outline-primary me-2">Update Dictator</button>
         </div>
     </div>
   </div>

@@ -1,14 +1,18 @@
-﻿namespace DictatorTweetAPI.Models
+﻿using Newtonsoft.Json;
+
+namespace DictatorTweetAPI.Models
 {
     public class Dictator
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Desciption { get; set; }
+        public string Description { get; set; }
+        [JsonIgnore]
+        public string FullName => FirstName + " " + LastName;
 
-        public string GetFullName()
+        public bool IsValid()
         {
-            return FirstName + " " + LastName;
+            return !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName);
         }
     }
 }
