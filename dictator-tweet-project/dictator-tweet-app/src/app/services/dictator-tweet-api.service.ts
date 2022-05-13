@@ -9,14 +9,25 @@ import { Dictator } from '../interfaces/dictator';
 export class DictatorTweetAPIService {
   constructor(private http: HttpClient) {}
 
-  dictators : Observable<Dictator[]> = new Observable;
   baseUrl: string = "https://localhost:5001/api";
 
   getDictators() : Observable<Dictator[]>{
     return this.http.get<Dictator[]>(this.baseUrl + "/dictator");
   }
 
-  createDictator(dictator: Dictator){
-    this.http.post(this.baseUrl + "/dictator", dictator).subscribe();
+  getDictator(fullName : string) : Observable<Dictator>{
+    return this.http.get<Dictator>(this.baseUrl + "/dictator/" + fullName);
+  }
+
+  createDictator(dictator: Dictator) : Observable<boolean>{
+    return this.http.post<boolean>(this.baseUrl + "/dictator", dictator);
+  }
+
+  updateDictator(fullName : string, dictator : Dictator) : Observable<boolean>{
+    return this.http.put<boolean>(this.baseUrl + "/dictator/" + fullName, dictator);
+  }
+
+  deleteDictator(fullName : string) : Observable<boolean>{
+    return this.http.delete<boolean>(this.baseUrl + "/dictator/" + fullName);
   }
 }

@@ -5,18 +5,22 @@
       <div class="col-lg-4">
         <div class="bs-component">
           <div class="card mb-4" >
-            <div class="card-header">Fullname's description</div>
+            <div class="card-header">
+              <span class="btn">
+                {{dictator.firstName}} {{dictator.lastName}}'s description
+              </span></div>
             <div class="card-body">
-              <p>Hence, legal documents are being crafted which take me completely out of business operations. The Presidency is a far more important task!</p>
+              <p>{{dictator.description}}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-8">
         <div class="card mb-3">
-          <div class="card-header">Tweets</div>
+          <div class="card-header">
+            <span class="btn">Tweets</span>
+          </div>
           <app-tweet></app-tweet>
-        
         </div>
       </div>
     </div>

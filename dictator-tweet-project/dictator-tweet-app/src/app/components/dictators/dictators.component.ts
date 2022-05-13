@@ -9,7 +9,7 @@ import { DictatorService } from 'src/app/services/dictator.service';
   styleUrls: ['./dictators.component.css']
 })
 export class DictatorsComponent implements OnInit {
-  constructor(private dictatorService: DictatorService) {}
+  constructor(public dictatorService: DictatorService) {}
 
   $dictators : Observable<Dictator[]> = new Observable;
   selectedDictatorName : string = "";

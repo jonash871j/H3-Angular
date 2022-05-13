@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Dictator } from 'src/app/interfaces/dictator';
+import { DictatorService } from 'src/app/services/dictator.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private dictatorService : DictatorService) { }
+
+  dictator : Dictator = {};
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      console.log();
+      this.dictatorService.getDictator(params['dictator']).subscribe((dictator : Dictator) => {
+        this.dictator = dictator;
+      });
+    });
   }
-
 }

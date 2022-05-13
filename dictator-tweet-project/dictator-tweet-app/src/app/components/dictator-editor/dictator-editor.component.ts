@@ -8,16 +8,26 @@ import { DictatorService } from 'src/app/services/dictator.service';
   templateUrl: './dictator-editor.component.html',
   styleUrls: ['./dictator-editor.component.css']
 })
-export class DictatorEditorComponent implements OnInit {
+export class DictatorEditorComponent {
 
-  constructor(private dictatorService : DictatorService) { }
-  @Input() selectedDictatorName : string = "";
+  constructor(public dictatorService : DictatorService) { }
   dictator: Dictator = {};
+  private _selectedDictatorName: string = "";
+ 
+  @Input()
+  set selectedDictatorName(value: string) {
+    this._selectedDictatorName = value;
 
-  ngOnInit(): void {
+    if (this.selectedDictatorName != ""){
+      this.dictatorService.getDictator(this._selectedDictatorName).subscribe((dictator : Dictator) => {
+        this.dictator = dictator;
+      });
+    }
+    else{
+      this.dictator = {};
+    }
   }
-
-  createDictator(){
-    this.dictatorService.createDictator(this.dictator);
+  get selectedDictatorName() {
+    return this._selectedDictatorName;
   }
 }

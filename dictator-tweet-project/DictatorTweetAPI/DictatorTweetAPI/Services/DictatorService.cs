@@ -1,51 +1,90 @@
 ﻿using DictatorTweetAPI.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace DictatorTweetAPI.Services
 {
     public interface IDictatorService
     {
         bool AddDictator(Dictator dictator);
+        bool DeleteDictator(string fullName);
+        Dictator GetDictator(string fullName);
         List<Dictator> GetDictators();
+        bool UpdateDictator(string fullName, Dictator dictator);
     }
 
     public class DictatorService : IDictatorService
     {
-        private static Random random = new();
         private const string FileName = "dictators.json";
-        private readonly ITweetService tweetService;
+        private List<Dictator> dictators = new();
 
-        public DictatorService(ITweetService tweetService)
+        public DictatorService()
         {
-            this.tweetService = tweetService;
+            ReadDictators();
         }
 
         public List<Dictator> GetDictators()
         {
-            if (!File.Exists(FileName))
-            {
-                return new List<Dictator>();
-            }
-            string fileData = File.ReadAllText(FileName);
-            return JsonConvert.DeserializeObject<List<Dictator>>(fileData);
+            return dictators;
+        }
+
+        public Dictator GetDictator(string fullName)
+        {
+            return GetDictators()
+                .FindAll(d => d.FullName == fullName)
+                .SingleOrDefault();
         }
 
         public bool AddDictator(Dictator dictator)
         {
-            List<Dictator> dictators = GetDictators();
-            if (dictators.Exists(d => d.FullName == dictator.FullName) || !dictator.IsValid())
+            if (!dictators.Exists(d => d.FullName == dictator.FullName) && dictator.IsValid())
             {
-                return false;
+                dictators.Add(dictator);
+                UpdateJson();
+                return true;
             }
+            return false;
+        }
 
-            dictators.Add(dictator);
+        public bool UpdateDictator(string fullName, Dictator dictator)
+        {
+            if (DeleteDictator(fullName))
+            {
+                return AddDictator(dictator);
+            }
+            return false;
+        }
+
+        public bool DeleteDictator(string fullName)
+        {
+            if (dictators.Exists(d => d.FullName == fullName))
+            {
+                dictators.RemoveAll(d => d.FullName == fullName);
+                UpdateJson();
+                return true;
+            }
+            return false;
+        }
+
+        private void ReadDictators()
+        {
+            if (!File.Exists(FileName))
+            {
+                dictators = new List<Dictator>();
+            }
+            else
+            {
+                string fileData = File.ReadAllText(FileName);
+                dictators = JsonConvert.DeserializeObject<List<Dictator>>(fileData);
+            }
+        }
+
+        private void UpdateJson()
+        {
             string json = JsonConvert.SerializeObject(dictators, Formatting.Indented);
             File.WriteAllText(FileName, json);
-            tweetService.AsignAuthorToRandomTweets(dictator.FullName, random.Next(6, 14));
-            return true;
         }
     }
 }

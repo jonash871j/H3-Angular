@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
 <br/><br/>
 <div class="container">
-    <app-dictator-editor (selectedDictatorName)="selectedDictatorName"></app-dictator-editor>
+    <app-dictator-editor [selectedDictatorName]="selectedDictatorName"></app-dictator-editor>
     <div class="row">
         <div class="col-lg-4" *ngFor="let dictator of $dictators | async">
             <div class="card mb-3">
                 <div class="card-header">
-                    <a class="btn" href="profile">{{ dictator.firstName }} {{ dictator.lastName }}'s profile</a>
-                    <button class="btn bi bi-pencil float-end" [(ngModel)]="selectedDictatorName" value="dictator.firstName + ' ' + dictator.lastName"></button>
+                    <a class="btn" href="profile?dictator={{dictator.firstName + ' ' + dictator.lastName}}">
+                        {{ dictator.firstName }} {{ dictator.lastName }}'s profile
+                    </a>
+                    <button class="btn bi bi-pencil float-end" (click)="selectedDictatorName = dictator.firstName + ' ' + dictator.lastName"></button>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -15,7 +17,7 @@
                             <img src="../../../assets/profile-image.jpg" class="rounded float-left" style="width: 100%;">
                         </div>
                         <div class="col-lg-8">
-                            <h5>{{selectedDictatorName}}</h5>
+                            <h5>About</h5>
                             <p>{{dictator.description}}</p>
                         </div>
                     </div>
