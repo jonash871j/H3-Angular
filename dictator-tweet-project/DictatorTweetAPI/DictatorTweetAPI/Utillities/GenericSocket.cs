@@ -64,7 +64,7 @@ namespace DictatorTweetAPI.Utillities
         }
 
         protected abstract void ServerInfo(string message);
-        protected abstract void SendResponse(string requestData, Socket clientSocket);
+        protected abstract void SendResponse(byte[] requestData, Socket clientSocket);
 
         private void ServerThreadEntry()
         {
@@ -83,16 +83,25 @@ namespace DictatorTweetAPI.Utillities
 
         private void OnClientRequest(IAsyncResult ar)
         {
-            // The clients has tried to connect continue in server thread 
-            manualResetEvent.Set();
-            Socket clientSocket = ((Socket)ar.AsyncState).EndAccept(ar);
+            try
+            {
+                // The clients has tried to connect continue in server thread 
+                manualResetEvent.Set();
+                Socket clientSocket = ((Socket)ar.AsyncState).EndAccept(ar);
 
-            // Gets the client request data
-            byte[] requestData = GetRequest(clientSocket);
+                // Gets the client request data
+                while (true)
+                {
+                    byte[] requestData = GetRequest(clientSocket);
 
-            // Sends server response to client
-            SendResponse(Encoding.UTF8.GetString(requestData), clientSocket);
-            clientSocket.Close();
+                    // Sends server response to client
+                    SendResponse(requestData, clientSocket);
+                }
+            }
+            catch(Exception ex)
+            {
+                ServerInfo("Client socket error: " + ex.Message);
+            }
         }
 
         private byte[] GetRequest(Socket clientSocket)

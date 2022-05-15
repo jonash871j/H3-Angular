@@ -34,7 +34,7 @@ namespace DictatorTweetAPI
             services.AddControllers();
             services.AddSingleton<IDictatorService, DictatorService>();
             services.AddSingleton<ITweetService, TweetService>();
-            services.AddSingleton<ITweetSocketService, TweetSocketService>();
+            services.AddSingleton<ITweetSocketService, TweetWebSocketService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DictatorTweetAPI", Version = "v1" });
