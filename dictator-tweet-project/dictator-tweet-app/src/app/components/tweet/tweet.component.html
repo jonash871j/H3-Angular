@@ -1,16 +1,21 @@
 <div class="card-body">
-    <i>Fullname 11/15/2022 11:56</i>
-    <div class="card mb-3" style="background-color: rgb(245, 249, 252);">
-      <div class="card-body">
-        <p class="card-text">
-          State Treasurer John Kennedy is my choice for US Senator from Louisiana. Early voting today; election next Saturday
-        </p>
+  <div *ngIf="tweet?.author != null">
+      <i>{{tweet?.author}} {{tweet?.dateTime}}</i>
+      <div class="card mb-3" style="background-color: rgb(245, 249, 252);">
+        <div class="card-body">
+          <p class="card-text">
+            {{tweet?.message}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <i class="col-sm text-center bi bi-chat-left-text"></i>
+        <i class="col-sm text-center container-fluid bi bi-arrow-repeat"></i>
+        <i class="col-sm text-center container-fluid bi bi-suit-heart"></i>
+        <i class="col-sm text-center container-fluid bi bi-upload"></i>
       </div>
     </div>
-    <div class="row">
-      <i class="col-sm text-center bi bi-chat-left-text"></i>
-      <i class="col-sm text-center container-fluid bi bi-arrow-repeat"></i>
-      <i class="col-sm text-center container-fluid bi bi-suit-heart"></i>
-      <i class="col-sm text-center container-fluid bi bi-upload"></i>
+    <div *ngIf="tweet?.author == null">
+      <h5 class="text-center">No tweets...</h5>
     </div>
   </div>

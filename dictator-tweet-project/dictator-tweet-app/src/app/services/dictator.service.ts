@@ -10,7 +10,7 @@ import { DictatorTweetAPIService } from './dictator-tweet-api.service';
 })
 export class DictatorService {
   constructor(private dictatorTweetAPIService: DictatorTweetAPIService) {}
-  dictators$ = new BehaviorSubject<Dictator[]>([]);
+  private dictators$ = new BehaviorSubject<Dictator[]>([]);
 
   getDictators() : BehaviorSubject<Dictator[]>{
     this.updateDictators();

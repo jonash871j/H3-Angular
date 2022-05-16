@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Dictator } from 'src/app/interfaces/dictator';
+import { Tweet } from 'src/app/interfaces/tweet';
 import { DictatorService } from 'src/app/services/dictator.service';
+import { TweetService } from 'src/app/services/tweet.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,17 +11,27 @@ import { DictatorService } from 'src/app/services/dictator.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute, 
+    private dictatorService : DictatorService, 
+    private tweetService : TweetService) { }
 
-  constructor(private route: ActivatedRoute, private dictatorService : DictatorService) { }
-
-  dictator : Dictator = {};
+  dictator : Dictator = {}; 
+  tweets : Tweet[] = []
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log();
       this.dictatorService.getDictator(params['dictator']).subscribe((dictator : Dictator) => {
         this.dictator = dictator;
+        this.updateTweets();
       });
+    });
+  }
+
+  updateTweets(){
+    let dictatorFullName : string = this.dictator.firstName + " " + this.dictator.lastName;
+    this.tweetService.getTweetsByAuthor(dictatorFullName).subscribe((tweets : Tweet[]) => {
+      this.tweets = tweets;
     });
   }
 }

@@ -3,5 +3,45 @@
     "FirstName": "Joseph",
     "LastName": "Stalin",
     "Description": "Georgian revolutionary and Soviet political leader who ruled the Soviet Union from 1922 to 1953. He held power as General Secretary of the Communist Party of the Soviet Union."
+  },
+  {
+    "FirstName": "Adolf",
+    "LastName": "Hitler",
+    "Description": "One of the most powerful leaders of the 20th century, Adolf Hitler was a German dicator whose policies started the WWII that resulted in the death of millions of people."
+  },
+  {
+    "FirstName": "Mao",
+    "LastName": "Zedong",
+    "Description": "One of the most significant and controversial leaders of the 20th century, Mao Zedong was a communist revolutionary and the founding father of the People's Republic of China which he governed as the chairman of Chinese Communist Party."
+  },
+  {
+    "FirstName": "Saddam",
+    "LastName": "Hussein",
+    "Description": "Ruled Iraq as its president from 1979 to 2003. Described as one of the last of the great dictators of the 20th century, his regime caused the deaths of at least 250,000 Iraqis."
+  },
+  {
+    "FirstName": "Francisco",
+    "LastName": "Franco",
+    "Description": "Overthrew the Second Spanish Republic by leading the Nationalist forces as their general during the Spanish Civil War."
+  },
+  {
+    "FirstName": "Bashar",
+    "LastName": "al-Assad",
+    "Description": "Current president of Syria and has been serving in this position since 17 July 2000. Over the years, he has also had a major impact on Syria as the commander-in-chief of the country's Armed Forces."
+  },
+  {
+    "FirstName": "Benito",
+    "LastName": "Mussolini",
+    "Description": "The dictator of Italy from 1925 to 1945, Benito Mussolini founded the Fascist Party in 1919. It opposed class discrimination and supported nationalism."
+  },
+  {
+    "FirstName": "Pol",
+    "LastName": "Pot",
+    "Description": "Cambodian politician who served as the prime minister of Democratic Kampuchea from 1975 and 1979."
+  },
+  {
+    "FirstName": "Nicolae",
+    "LastName": "Ceaușescu",
+    "Description": "Romanian politician who served as the first president of the country. Ceaușescu's communist government was totalitarian and was responsible for human rights abuses and severe repression."
   }
 ]

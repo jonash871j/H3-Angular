@@ -2,15 +2,8 @@
 using DictatorTweetAPI.Utillities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Net.Sockets;
-using System.Reflection.Emit;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace DictatorTweetAPI.Services
 {
@@ -45,9 +38,8 @@ namespace DictatorTweetAPI.Services
             }
             else
             {
-                string author = FrameConverter.GetStringFromFrame(requestData);
-                List<Tweet> tweets = tweetService.GetTweetsByAuthor(author);
-                webSocketResponder.MessageResponse(JsonConvert.SerializeObject(tweets));
+                List<Tweet> tweets = tweetService.GetTweets();
+                webSocketResponder.MessageResponse(JsonConvert.SerializeObject(tweets, JsonSettings.DefaultSettings));
             }
         }
 

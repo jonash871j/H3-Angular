@@ -11,23 +11,27 @@ import { DictatorService } from 'src/app/services/dictator.service';
 export class DictatorEditorComponent {
 
   constructor(public dictatorService : DictatorService) { }
-  dictator: Dictator = {};
+  
   private _selectedDictatorName: string = "";
+  dictator: Dictator = {};
  
   @Input()
-  set selectedDictatorName(value: string) {
-    this._selectedDictatorName = value;
+  set selectedDictatorName(selectedDictatorName: string) {
+    this._selectedDictatorName = selectedDictatorName;
+    this.updateDictator();
+  }
+  get selectedDictatorName() {
+    return this._selectedDictatorName;
+  }
 
+  private updateDictator(){
     if (this.selectedDictatorName != ""){
-      this.dictatorService.getDictator(this._selectedDictatorName).subscribe((dictator : Dictator) => {
+      this.dictatorService.getDictator(this.selectedDictatorName).subscribe((dictator : Dictator) => {
         this.dictator = dictator;
       });
     }
     else{
       this.dictator = {};
     }
-  }
-  get selectedDictatorName() {
-    return this._selectedDictatorName;
   }
 }

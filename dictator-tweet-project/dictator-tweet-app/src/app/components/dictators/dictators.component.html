@@ -21,7 +21,7 @@
                             <p>{{dictator.description}}</p>
                         </div>
                     </div>
-                    <app-tweet></app-tweet>
+                    <app-tweet [tweet]="tweetService.getLatestTweetByAuthor(dictator.firstName + ' ' + dictator.lastName) | async"></app-tweet>
                 </div>
             </div>
         </div>

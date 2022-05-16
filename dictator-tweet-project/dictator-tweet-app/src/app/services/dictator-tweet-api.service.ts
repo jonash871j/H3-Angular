@@ -9,7 +9,7 @@ import { Dictator } from '../interfaces/dictator';
 export class DictatorTweetAPIService {
   constructor(private http: HttpClient) {}
 
-  baseUrl: string = "https://localhost:5001/api";
+  private baseUrl: string = "https://localhost:5001/api";
 
   getDictators() : Observable<Dictator[]>{
     return this.http.get<Dictator[]>(this.baseUrl + "/dictator");

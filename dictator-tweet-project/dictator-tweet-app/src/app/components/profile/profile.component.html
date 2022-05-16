@@ -7,6 +7,17 @@
           <div class="card mb-4" >
             <div class="card-header">
               <span class="btn">
+                {{dictator.firstName}} {{dictator.lastName}}'s profile picture
+              </span></div>
+            <div class="card-body">
+              <img src="../../../assets/profile-image.jpg" class="rounded float-left" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+        <div class="bs-component">
+          <div class="card mb-4" >
+            <div class="card-header">
+              <span class="btn">
                 {{dictator.firstName}} {{dictator.lastName}}'s description
               </span></div>
             <div class="card-body">
@@ -20,7 +31,8 @@
           <div class="card-header">
             <span class="btn">Tweets</span>
           </div>
-          <app-tweet></app-tweet>
+          <h5 class="text-center mt-3 mb-3" *ngIf="tweets.length == 0">No tweets...</h5>
+          <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet"></app-tweet>
         </div>
       </div>
     </div>
